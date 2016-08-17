@@ -10,8 +10,8 @@
 		<span v-else><i class="glyphicon glyphicon-file"></i></span>
 		
 		<a href="javascript:void(0);" 
-			@dblclick.stop="clickCallback(model.id, model.name)" 
-			@click.stop="toggle">{{model.name}}</a>
+			@dblclick.stop="clickCallback(model.id)" 
+			@click.stop="toggleClick(model)">{{model.name}}</a>
 		
 		<ul v-if="isParent" v-show="open">
 			<item v-for="model in model.childrens" :model="model">{{model.name}}</item>
@@ -24,9 +24,7 @@
 	export default {
 		name: 'item',
 		props: {
-			model: {
-				type: Object
-			}
+			model: Object
 		},
 		data() {
 			return {
@@ -39,13 +37,13 @@
 			}
 		},
 		methods: {
-			toggle() {
-				// click a link do something
+			toggleClick(model) {
+				this.$dispatch('on-click', model);
 			},
-			clickCallback(id, name) {
+			clickCallback(id) {
 				if(this.isParent) this.open = !this.open;
-				if(this.isParent && this.open && this.$parent.async) {
-					this.$dispatch('handleClickEvent', id, name);
+				if(this.isParent && this.open) {
+					this.$dispatch('handleExpandEvent', id);
 				}
 			}
 		}

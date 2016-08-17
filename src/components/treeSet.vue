@@ -20,7 +20,9 @@
 			async: {
 				type: Boolean,
 				coerce: coerceBoolean,
-				default: false
+				default: function() {
+					return false;
+				}
 			},
 			param: {
 				type: String,
@@ -40,12 +42,17 @@
 			});
 		},
 		events: {
-			handleClickEvent: function(pid, pname) {
-				callAjax(this.url, this.param = pid).then((result) => {
-					this.recurLoadData(pid, this.treeData, result.datas);
-				}).catch((error) => {
-					console.error(error);
-				});
+			/**
+			 * click current parentNode async load childNodes
+			 */
+			handleExpandEvent(pid) {
+				if(this.async) {
+					callAjax(this.url, this.param = pid).then((result) => {
+						this.recurLoadData(pid, this.treeData, result.datas);
+					}).catch((error) => {
+						console.error(error);
+					});
+				}
 			}
 		},
 		methods: {
@@ -118,7 +125,7 @@
 		border-top: 1px dotted #ccc;
 	}
 	
-	.tree-lines ul> li{
+	.tree-lines ul> li {
 		position: relative;
 		left: -21px;
 	}

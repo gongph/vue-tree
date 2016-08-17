@@ -6,7 +6,7 @@ config.entry = {
 
 config.output = {
 	filename: './dist/[name].js',
-	library: 'VueNeris',
+	library: 'VueTree',
 	libraryTarget: 'umd'
 }
 
