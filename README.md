@@ -12,7 +12,7 @@ vue-tree component for [Vue](http://vuejs.org/) and build with vue.js + webpack 
 <link href="css/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="vue.js"></script>
-<script src="[component path]/dist//vue-tree.js" type="text/javascript" charset="utf-8"></script>
+<script src="[component path]/dist/vue-tree.js" type="text/javascript" charset="utf-8"></script>
 ```
 
 Add the component in your vue view.
@@ -30,10 +30,10 @@ Add the component in your vue view.
 	     'tree': tree
 	   },
 	   methods: {
-	     onClick: function (node) {
-	     	// Todo: your code here
-		console.log('current click node name is:' + node.name);
-	     }
+	     	onClick: function (node) {
+	     		// Todo: your code here
+			console.log('current click node name is:' + node.name);
+		}
            }
 	})
    </script>
