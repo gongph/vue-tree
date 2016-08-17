@@ -20,22 +20,23 @@ Add the component in your vue view.
 ```html
 <body>
   <div id="app">
-		<tree url="your-url-path" @click="onClick"></tree>
-	</div>
-	<script type="text/javascript">
-			var tree = VueNeris.tree;
-			new Vue({
-				el: '#app',
-				components: {
-					'tree': tree
-				},
-				methods: {
-					onClick: function (node) {
-						console.log('current click node name is:' + node.name);
-					}
-				}
-			})
-		</script>
+    <tree url="your-url-path" @on-click="onClick"></tree>
+  </div>
+  <script type="text/javascript">
+	var tree = VueNeris.tree;
+	new Vue({
+	   el: '#app',
+	   components: {
+	     'tree': tree
+	   },
+	   methods: {
+	     onClick: function (node) {
+	     	// Todo: your code here
+		console.log('current click node name is:' + node.name);
+	     }
+           }
+	})
+   </script>
 </body>
 ```
 
@@ -43,7 +44,7 @@ Add the component in your vue view.
 List of available props to use in component:
 
 Prop        | Data Type         | Default   | Description
------------ | ----------------- | --------- | -----------
+----------- | ----------------- | --------- | -------------------------------
 `url`       | String            | ''        | The data source.
 `async`     | Boolean           | false     | Tree's selected value.
 
