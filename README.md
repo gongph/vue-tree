@@ -25,16 +25,16 @@ Add the component in your vue view.
   <script type="text/javascript">
 	var tree = VueNeris.tree;
 	new Vue({
-	   el: '#app',
-	   components: {
-	     'tree': tree
-	   },
-	   methods: {
-	     	onClick: function (node) {
-	     		// Todo: your code here
-			console.log('current click node name is:' + node.name);
+		el: '#app',
+		components: {
+			'tree': tree
+		},
+		methods: {
+			onClick: function (node) {
+				// Todo: your code here
+				console.log('current click node name is:' + node.name);
+			}
 		}
-           }
 	})
    </script>
 </body>
