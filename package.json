@@ -1,0 +1,53 @@
+{
+  "name": "vue-neris",
+  "version": "1.0.0",
+  "description": "common components develop with Vue.js",
+  "main": "dist/vue-neris.js",
+  "directories": {
+    "src": "src/"
+  },
+  "scripts": {
+    "docs": "webpack-dev-server --inline --hot --progress --quiet",
+    "build": "webpack --progress --hide-modules --config config/webpack.build.js",
+    "builddocs": "webpack --progress --hide-modules"
+  },
+  "keywords": [
+    "vue",
+    "vue-bootstrap",
+    "vue-component",
+    "bootstrap",
+    "neris"
+  ],
+  "author": "Common components development team",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.13.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-preset-es2015": "^6.13.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-runtime": "^6.11.6",
+    "css-loader": "^0.23.1",
+    "eslint": "^3.1.0",
+    "eslint-loader": "^1.4.1",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.22.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "mockjs": "^1.0.1-beta2",
+    "node-sass": "^3.8.0",
+    "prismjs": "^1.5.1",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "vue-hot-reload-api": "^1.3.3",
+    "vue-html-loader": "^1.2.3",
+    "vue-loader": "^8.5.3",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "vue": "^1.0.26"
+  }
+}
