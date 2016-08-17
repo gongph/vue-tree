@@ -16,7 +16,7 @@ a tree component build with vue.js + webpack + es6.
 * 构建组件 `npm run build`
 
 ## 效果图
-[vue-tree](../../tree/master/docs/assets/imgs/vue-tree.png)
+[vue-tree](https://github.com/gongph/vue-tree/blob/master/docs/assets/imgs/vue-tree.png)
 
 ## License
 vue-tree is licensed under [The MIT License](LICENSE).
