@@ -1,22 +1,73 @@
-# vue-tree
-a tree component build with vue.js + webpack + es6. 
+# 介绍（introduce）
+vue-tree component for [Vue](http://vuejs.org/) and build with vue.js + webpack + es6. 
 
 依赖vue.js 和 bootstrap css 3.x.x
 * [Vue.js](http://vuejs.org/) (required ^v1.x.x, test with v1.0.8).
 * [Bootstrap CSS](http://getbootstrap.com/) (required 3.x.x, test with 3.3.5). 
 
-## 功能点
-* 支持加载多个根节点
-* 支持异步、同步加载
+## 使用（Usage）
+1. git clone the vue-tree
+2. 页面引入
+```html
+<link href="css/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-## 本地安装
-* git clone
-* Install with `npm install`
-* 运行api文档来查看示例 `npm run docs`
-* 构建组件 `npm run build`
+<script src="vue.js"></script>
+<script src="[component path]/dist//vue-tree.js" type="text/javascript" charset="utf-8"></script>
+```
 
-## 效果图
-[vue-tree](https://github.com/gongph/vue-tree/blob/master/docs/assets/imgs/vue-tree.png)
+Add the component in your vue view.
+
+```html
+<body>
+  <div id="app">
+		<tree url="your-url-path" @click="onClick"></tree>
+	</div>
+	<script type="text/javascript">
+			var tree = VueNeris.tree;
+			new Vue({
+				el: '#app',
+				components: {
+					'tree': tree
+				},
+				methods: {
+					onClick: function (node) {
+						console.log('current click node name is:' + node.name);
+					}
+				}
+			})
+		</script>
+</body>
+```
+
+## Options
+List of available props to use in component:
+
+Prop        | Data Type         | Default   | Description
+----------- | ----------------- | --------- | -----------
+`url`       | String            | ''        | The data source.
+`async`     | Boolean           | false     | Tree's selected value.
+
+### Events
+List of available events to use in component:
+
+Event            | Passes                  | Description
+---------------- | ----------------------- | -----------
+`@on-click`      | `node`: Selected node   | Triggered when a node is clicked.
+
+```javascript
+new Vue({
+    el: '#app',
+    data: {
+      treeNode: Object
+    },
+    methods: {
+        onClick: function(node) {
+            // TODO my code here
+            this.treeNode = node;
+        }
+    }
+});
+```
 
 ## License
-vue-tree is licensed under [The MIT License](LICENSE).
+Copyright (c) 2016 [gongph](http://www.gongph.com/). vue-tree is licensed under [The MIT License](LICENSE).
