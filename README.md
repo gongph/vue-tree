@@ -46,7 +46,7 @@ List of available props to use in component:
 Prop        | Data Type         | Default   | Description
 ----------- | ----------------- | --------- | -------------------------------
 `url`       | String            | ''        | The data source.
-`async`     | Boolean           | false     | Tree's selected value.
+`async`     | Boolean           | false     | Whether open async load data.
 
 ### Events
 List of available events to use in component:
