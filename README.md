@@ -2,8 +2,8 @@
 vue-tree component for [Vue](http://vuejs.org/) and build with vue.js + webpack + es6. 
 
 依赖vue.js 和 bootstrap css 3.x.x
-* [Vue.js](http://vuejs.org/) (required ^v1.x.x, test with v1.0.8).
-* [Bootstrap CSS](http://getbootstrap.com/) (required 3.x.x, test with 3.3.5). 
+* [Vue.js](http://vuejs.org/) (required ^v1.x.x, test with v1.0.26).
+* [Bootstrap CSS](http://getbootstrap.com/) (required 3.x.x, test with 3.3.6). 
 
 ## 使用（Usage）
 1. git clone the vue-tree
