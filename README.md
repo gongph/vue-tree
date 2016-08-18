@@ -40,13 +40,14 @@ Add the component in your vue view.
 </body>
 ```
 
-## Options
+## 选项
 List of available props to use in component:
 
 Prop        | Data Type         | Default   | Description
 ----------- | ----------------- | --------- | -------------------------------
-`url`       | String            | ''        | The data source.
-`async`     | Boolean           | false     | Whether open async load data.
+`url`       | String            | ''        | 数据源。
+`async`     | Boolean           | false     | 是否开启异步加载。
+`effect`    | String            | ''        | 过渡动画。 可选值：`fade` | `expand` | `bounce` | `fly`
 
 ### Events
 List of available events to use in component:

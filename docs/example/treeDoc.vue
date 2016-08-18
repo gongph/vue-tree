@@ -8,10 +8,10 @@
 		</p>
 		<h2>同步加载</h2>
 		<div class="bs-example">
-			<tree url="http://syncLoadData.com" @on-click="syncClick"></tree>
+			<tree url="http://syncLoadData.com" @on-click="syncClick" effect="bounce"></tree>
 			<p>你选择的是：{{syncNode | json}}</p>
 		</div>
-		<pre><code class="language-markup"><script type="language-mark-up"><tree url="your_request_url" @on-click="syncClick"></tree>
+		<pre><code class="language-markup"><script type="language-mark-up"><tree url="your_request_url" @on-click="syncClick" effect="bounce"></tree>
 </script></code></pre>	
 
 		<h2>异步加载</h2>
@@ -43,6 +43,12 @@
 		        <td><code>Boolean</code></td>
 		        <td><code>false</code></td>
 		        <td>是否开启异步加载.</td>
+		      </tr>
+		      <tr>
+		        <td>effect</td>
+		        <td><code>String</code></td>
+		        <td><code>''</code></td>
+		        <td>过度效果。fade | expand | bounce | fly</td>
 		      </tr>
 		      <tr>
 		        <td>on-click</td>

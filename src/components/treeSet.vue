@@ -1,7 +1,7 @@
 <template>
 	<ul class="neris-tree tree-lines">
 		<template v-for="node in treeData">
-			<tree :model="node"></tree>
+			<tree :model="node" :effect="effect"></tree>
 		</template>
 	</ul>
 </template>
@@ -27,6 +27,10 @@
 			param: {
 				type: String,
 				default: '0'
+			},
+			effect: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
