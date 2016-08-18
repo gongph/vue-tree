@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\treeSet.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(77)
+	__vue_template__ = __webpack_require__(79)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -132,7 +132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.neris-tree {\n\tpadding-left: 0;\n}\n\n.neris-tree li {\n\tposition: relative;\n\tpadding: 2px 0 2px 5px;\n\tlist-style: none;\n}\n\n.neris-tree li span:hover {\n\tcolor: #337ab7;\n\tcursor: pointer\n}\n\n.neris-tree li span i {\n\tfont-size: 1px;\n\twidth: 14px;\n\tcolor: #999\n}\n\n.neris-tree a {\n\tcolor: #222\n}\n\n.neris-tree li.open> ul {\n\tdisplay: block\n}\n\n.tree-lines li.has-list.open>ul:after {\n\tposition: absolute;\n\ttop: 22px;\n\tbottom: -2px;\n\tleft: 9px;\n\tz-index: 1;\n\tdisplay: block;\n\tcontent: ' ';\n\tborder-left: 1px dotted #ccc;\n}\n\n.tree-lines ul>li:after {\n\tposition: absolute;\n\ttop: 11px;\n\tleft: -13px;\n\tz-index: 1;\n\tdisplay: block;\n\twidth: 15px;\n\tcontent: ' ';\n\tborder-top: 1px dotted #ccc;\n}\n\n.tree-lines ul> li {\n\tposition: relative;\n\tleft: -21px;\n}\n", "", {"version":3,"sources":["/./src/components/treeSet.vue?27300948"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA4EA;CACA,gBAAA;CACA;;AAEA;CACA,mBAAA;CACA,uBAAA;CACA,iBAAA;CACA;;AAEA;CACA,eAAA;CACA,eAAA;CACA;;AAEA;CACA,eAAA;CACA,YAAA;CACA,WAAA;CACA;;AAEA;CACA,WAAA;CACA;;AAEA;CACA,cAAA;CACA;;AAEA;CACA,mBAAA;CACA,UAAA;CACA,aAAA;CACA,UAAA;CACA,WAAA;CACA,eAAA;CACA,aAAA;CACA,6BAAA;CACA;;AAEA;CACA,mBAAA;CACA,UAAA;CACA,YAAA;CACA,WAAA;CACA,eAAA;CACA,YAAA;CACA,aAAA;CACA,4BAAA;CACA;;AAEA;CACA,mBAAA;CACA,YAAA;CACA","file":"treeSet.vue","sourcesContent":["<template>\n\t<ul class=\"neris-tree tree-lines\">\n\t\t<template v-for=\"node in treeData\">\n\t\t\t<tree :model=\"node\"></tree>\n\t\t</template>\n\t</ul>\n</template>\n\n<script>\n\timport coerceBoolean from '../utils/coerceBoolean';\n\timport callAjax from '../utils/callAjax';\n\timport tree from './tree';\n\n\texport default {\n\t\tcomponents: {\n\t\t\ttree\n\t\t},\n\t\tprops: {\n\t\t\turl: String,\n\t\t\tasync: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tcoerce: coerceBoolean,\n\t\t\t\tdefault: function() {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t},\n\t\t\tparam: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '0'\n\t\t\t}\n\t\t},\n\t\tdata() {\n\t\t\treturn {\n\t\t\t\ttreeData: []\n\t\t\t}\n\t\t},\n\t\tready() {\n\t\t\tcallAjax(this.url, this.param).then((result) => {\n\t\t\t\tthis.treeData = result.datas;\n\t\t\t}).catch((error) => {\n\t\t\t\tconsole.error(error);\n\t\t\t});\n\t\t},\n\t\tevents: {\n\t\t\t/**\n\t\t\t * click current parentNode async load childNodes\n\t\t\t */\n\t\t\thandleExpandEvent(pid) {\n\t\t\t\tif(this.async) {\n\t\t\t\t\tcallAjax(this.url, this.param = pid).then((result) => {\n\t\t\t\t\t\tthis.recurLoadData(pid, this.treeData, result.datas);\n\t\t\t\t\t}).catch((error) => {\n\t\t\t\t\t\tconsole.error(error);\n\t\t\t\t\t});\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tmethods: {\n\t\t\trecurLoadData(pid, treeNodes, childNodes) {\n\t\t\t\tfor(let i = 0, len = treeNodes.length; i < len; i++) {\n\t\t\t\t\tif(treeNodes[i].id === pid) {\n\t\t\t\t\t\tif(treeNodes[i].childrens.length <= 0) {\n\t\t\t\t\t\t\ttreeNodes[i].childrens = childNodes;\n\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t}\n\t\t\t\t\t} else {\n\t\t\t\t\t\tthis.recurLoadData(pid, treeNodes[i].childrens, childNodes);\n\t\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n</script>\n\n<style>\n\t.neris-tree {\n\t\tpadding-left: 0;\n\t}\n\t\n\t.neris-tree li {\n\t\tposition: relative;\n\t\tpadding: 2px 0 2px 5px;\n\t\tlist-style: none;\n\t}\n\t\n\t.neris-tree li span:hover {\n\t\tcolor: #337ab7;\n\t\tcursor: pointer\n\t}\n\t\n\t.neris-tree li span i {\n\t\tfont-size: 1px;\n\t\twidth: 14px;\n\t\tcolor: #999\n\t}\n\t\n\t.neris-tree a {\n\t\tcolor: #222\n\t}\n\t\n\t.neris-tree li.open> ul {\n\t\tdisplay: block\n\t}\n\t\n\t.tree-lines li.has-list.open>ul:after {\n\t\tposition: absolute;\n\t\ttop: 22px;\n\t\tbottom: -2px;\n\t\tleft: 9px;\n\t\tz-index: 1;\n\t\tdisplay: block;\n\t\tcontent: ' ';\n\t\tborder-left: 1px dotted #ccc;\n\t}\n\t\n\t.tree-lines ul>li:after {\n\t\tposition: absolute;\n\t\ttop: 11px;\n\t\tleft: -13px;\n\t\tz-index: 1;\n\t\tdisplay: block;\n\t\twidth: 15px;\n\t\tcontent: ' ';\n\t\tborder-top: 1px dotted #ccc;\n\t}\n\t\n\t.tree-lines ul> li {\n\t\tposition: relative;\n\t\tleft: -21px;\n\t}\n</style>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.neris-tree {\n\tpadding-left: 0;\n}\n\n.neris-tree li {\n\tposition: relative;\n\tpadding: 2px 0 2px 5px;\n\tlist-style: none;\n}\n\n.neris-tree li span:hover {\n\tcolor: #337ab7;\n\tcursor: pointer\n}\n\n.neris-tree li span i {\n\tfont-size: 1px;\n\twidth: 14px;\n\tcolor: #999\n}\n\n.neris-tree a {\n\tcolor: #222\n}\n\n.neris-tree li.open> ul {\n\tdisplay: block\n}\n\n.tree-lines li.has-list.open>ul:after {\n\tposition: absolute;\n\ttop: 22px;\n\tbottom: -2px;\n\tleft: 9px;\n\tz-index: 1;\n\tdisplay: block;\n\tcontent: ' ';\n\tborder-left: 1px dotted #ccc;\n}\n\n.tree-lines ul>li:after {\n\tposition: absolute;\n\ttop: 11px;\n\tleft: -13px;\n\tz-index: 1;\n\tdisplay: block;\n\twidth: 15px;\n\tcontent: ' ';\n\tborder-top: 1px dotted #ccc;\n}\n\n.tree-lines ul> li {\n\tposition: relative;\n\tleft: -21px;\n}\n", "", {"version":3,"sources":["/./src/components/treeSet.vue?68530316"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAgFA;CACA,gBAAA;CACA;;AAEA;CACA,mBAAA;CACA,uBAAA;CACA,iBAAA;CACA;;AAEA;CACA,eAAA;CACA,eAAA;CACA;;AAEA;CACA,eAAA;CACA,YAAA;CACA,WAAA;CACA;;AAEA;CACA,WAAA;CACA;;AAEA;CACA,cAAA;CACA;;AAEA;CACA,mBAAA;CACA,UAAA;CACA,aAAA;CACA,UAAA;CACA,WAAA;CACA,eAAA;CACA,aAAA;CACA,6BAAA;CACA;;AAEA;CACA,mBAAA;CACA,UAAA;CACA,YAAA;CACA,WAAA;CACA,eAAA;CACA,YAAA;CACA,aAAA;CACA,4BAAA;CACA;;AAEA;CACA,mBAAA;CACA,YAAA;CACA","file":"treeSet.vue","sourcesContent":["<template>\n\t<ul class=\"neris-tree tree-lines\">\n\t\t<template v-for=\"node in treeData\">\n\t\t\t<tree :model=\"node\" :effect=\"effect\"></tree>\n\t\t</template>\n\t</ul>\n</template>\n\n<script>\n\timport coerceBoolean from '../utils/coerceBoolean';\n\timport callAjax from '../utils/callAjax';\n\timport tree from './tree';\n\n\texport default {\n\t\tcomponents: {\n\t\t\ttree\n\t\t},\n\t\tprops: {\n\t\t\turl: String,\n\t\t\tasync: {\n\t\t\t\ttype: Boolean,\n\t\t\t\tcoerce: coerceBoolean,\n\t\t\t\tdefault: function() {\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t},\n\t\t\tparam: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: '0'\n\t\t\t},\n\t\t\teffect: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: ''\n\t\t\t}\n\t\t},\n\t\tdata() {\n\t\t\treturn {\n\t\t\t\ttreeData: []\n\t\t\t}\n\t\t},\n\t\tready() {\n\t\t\tcallAjax(this.url, this.param).then((result) => {\n\t\t\t\tthis.treeData = result.datas;\n\t\t\t}).catch((error) => {\n\t\t\t\tconsole.error(error);\n\t\t\t});\n\t\t},\n\t\tevents: {\n\t\t\t/**\n\t\t\t * click current parentNode async load childNodes\n\t\t\t */\n\t\t\thandleExpandEvent(pid) {\n\t\t\t\tif(this.async) {\n\t\t\t\t\tcallAjax(this.url, this.param = pid).then((result) => {\n\t\t\t\t\t\tthis.recurLoadData(pid, this.treeData, result.datas);\n\t\t\t\t\t}).catch((error) => {\n\t\t\t\t\t\tconsole.error(error);\n\t\t\t\t\t});\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tmethods: {\n\t\t\trecurLoadData(pid, treeNodes, childNodes) {\n\t\t\t\tfor(let i = 0, len = treeNodes.length; i < len; i++) {\n\t\t\t\t\tif(treeNodes[i].id === pid) {\n\t\t\t\t\t\tif(treeNodes[i].childrens.length <= 0) {\n\t\t\t\t\t\t\ttreeNodes[i].childrens = childNodes;\n\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t}\n\t\t\t\t\t} else {\n\t\t\t\t\t\tthis.recurLoadData(pid, treeNodes[i].childrens, childNodes);\n\t\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n</script>\n\n<style>\n\t.neris-tree {\n\t\tpadding-left: 0;\n\t}\n\t\n\t.neris-tree li {\n\t\tposition: relative;\n\t\tpadding: 2px 0 2px 5px;\n\t\tlist-style: none;\n\t}\n\t\n\t.neris-tree li span:hover {\n\t\tcolor: #337ab7;\n\t\tcursor: pointer\n\t}\n\t\n\t.neris-tree li span i {\n\t\tfont-size: 1px;\n\t\twidth: 14px;\n\t\tcolor: #999\n\t}\n\t\n\t.neris-tree a {\n\t\tcolor: #222\n\t}\n\t\n\t.neris-tree li.open> ul {\n\t\tdisplay: block\n\t}\n\t\n\t.tree-lines li.has-list.open>ul:after {\n\t\tposition: absolute;\n\t\ttop: 22px;\n\t\tbottom: -2px;\n\t\tleft: 9px;\n\t\tz-index: 1;\n\t\tdisplay: block;\n\t\tcontent: ' ';\n\t\tborder-left: 1px dotted #ccc;\n\t}\n\t\n\t.tree-lines ul>li:after {\n\t\tposition: absolute;\n\t\ttop: 11px;\n\t\tleft: -13px;\n\t\tz-index: 1;\n\t\tdisplay: block;\n\t\twidth: 15px;\n\t\tcontent: ' ';\n\t\tborder-top: 1px dotted #ccc;\n\t}\n\t\n\t.tree-lines ul> li {\n\t\tposition: relative;\n\t\tleft: -21px;\n\t}\n</style>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -455,6 +455,10 @@ return /******/ (function(modules) { // webpackBootstrap
 			param: {
 				type: String,
 				default: '0'
+			},
+			effect: {
+				type: String,
+				default: ''
 			}
 		},
 		data: function data() {
@@ -566,7 +570,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// <template>
 	// 	<ul class="neris-tree tree-lines">
 	// 		<template v-for="node in treeData">
-	// 			<tree :model="node"></tree>
+	// 			<tree :model="node" :effect="effect"></tree>
 	// 		</template>
 	// 	</ul>
 	// </template>
@@ -2083,12 +2087,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(75)
+	__webpack_require__(75)
+	__vue_script__ = __webpack_require__(77)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\tree.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(76)
+	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -2108,6 +2113,46 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(76);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(5)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js?sourceMap!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tree.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js?sourceMap!./../../node_modules/vue-loader/lib/style-rewriter.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./tree.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(4)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/**fade effect*/\n.fade-transition {\n\t-webkit-transition: all .3s ease;\n\ttransition: all .3s ease;\n}\n\n.fade-enter,\n.fade-leave {\n\topacity: 0;\n\t-webkit-transform: scale(1.1);\n\ttransform: scale(1.1);\n}\n\n/**expand effect*/\n.expand-transition {\n\t-webkit-transition: all .2s ease;\n\ttransition: all .2s ease;\n}\n\n.expand-enter,\n.expand-leave {\n\topacity: 0;\n\t-webkit-transform: translate(0px, -30px);\n\ttransform: translate(0px, -30px);\n}\n\n/**bounce effect*/\n.bounce-transition {\n\t-webkit-transition: all .3s ease;\n\ttransition: all .3s ease;\n}\n\n.bounce-enter,\n.bounce-leave {\n\topacity: 0;\n\t-webkit-transform: scale3d(1.1, 0, 0);\n\ttransform: scale3d(1.1, 0, 0);\n}\n\n/**fly effect*/\n.fly-transition {\n\t-webkit-transition: all .3s ease;\n\ttransition: all .3s ease;\n}\n\n.fly-enter,\n.fly-leave {\n\topacity: 0;\n\t-webkit-transform: rotateY(90deg);\n\ttransform: rotateY(90deg);\n}\n", "", {"version":3,"sources":["/./src/components/tree.vue?c8ccf144"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAwDA,gBAAA;AACA;CACA,iCAAA;CAAA,yBAAA;CACA;;AAEA;;CAEA,WAAA;CACA,8BAAA;CACA,sBAAA;CACA;;AAEA,kBAAA;AACA;CACA,iCAAA;CAAA,yBAAA;CACA;;AAEA;;CAEA,WAAA;CACA,yCAAA;CACA,iCAAA;CACA;;AAEA,kBAAA;AACA;CACA,iCAAA;CAAA,yBAAA;CACA;;AAEA;;CAEA,WAAA;CACA,sCAAA;CACA,8BAAA;CACA;;AAEA,eAAA;AACA;CACA,iCAAA;CAAA,yBAAA;CACA;;AAEA;;CAEA,WAAA;CACA,kCAAA;CACA,0BAAA;CACA","file":"tree.vue","sourcesContent":["<template>\n\t<li class=\"has-list\" :class=\"[open? 'open': '']\">\n\t\t<span v-if=\"isParent\">\n\t\t\t<i class=\"glyphicon\" \n\t\t\t\t@click.stop.self=\"clickCallback(model.id, model.name)\" \n\t\t\t\t:class=\"[open ? 'glyphicon-folder-open' : 'glyphicon-folder-close']\">\n\t\t\t</i>\n\t\t</span>\n\n\t\t<span v-else><i class=\"glyphicon glyphicon-file\"></i></span>\n\n\t\t<a href=\"javascript:void(0);\" @dblclick.stop=\"clickCallback(model.id)\" @click.stop=\"toggleClick(model)\">{{model.name}}</a>\n\n\t\t<ul v-if=\"isParent\" v-show=\"open\" :transition=\"effect\">\n\t\t\t<item v-for=\"model in model.childrens\" :model=\"model\" :effect=\"effect\">{{model.name}}</item>\n\t\t</ul>\n\n\t</li>\n</template>\n\n<script>\n\texport default {\n\t\tname: 'item',\n\t\tprops: {\n\t\t\tmodel: Object,\n\t\t\teffect: {\n\t\t\t\ttype: String,\n\t\t\t\tdefault: ''\n\t\t\t}\n\t\t},\n\t\tdata() {\n\t\t\treturn {\n\t\t\t\topen: false\n\t\t\t}\n\t\t},\n\t\tcomputed: {\n\t\t\tisParent() {\n\t\t\t\treturn this.model.isParent;\n\t\t\t}\n\t\t},\n\t\tmethods: {\n\t\t\ttoggleClick(model) {\n\t\t\t\tthis.$dispatch('on-click', model);\n\t\t\t},\n\t\t\tclickCallback(id) {\n\t\t\t\tif(this.isParent) this.open = !this.open;\n\t\t\t\tif(this.isParent && this.open) {\n\t\t\t\t\tthis.$dispatch('handleExpandEvent', id);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t}\n</script>\n\n<style>\n\t/**fade effect*/\n\t.fade-transition {\n\t\ttransition: all .3s ease;\n\t}\n\t\n\t.fade-enter,\n\t.fade-leave {\n\t\topacity: 0;\n\t\t-webkit-transform: scale(1.1);\n\t\ttransform: scale(1.1);\n\t}\n\t\n\t/**expand effect*/\n\t.expand-transition {\n\t\ttransition: all .2s ease;\n\t}\n\t\n\t.expand-enter,\n\t.expand-leave {\n\t\topacity: 0;\n\t\t-webkit-transform: translate(0px, -30px);\n\t\ttransform: translate(0px, -30px);\n\t}\n\t\n\t/**bounce effect*/\n\t.bounce-transition {\n\t\ttransition: all .3s ease;\n\t}\n\t\n\t.bounce-enter,\n\t.bounce-leave {\n\t\topacity: 0;\n\t\t-webkit-transform: scale3d(1.1, 0, 0);\n\t\ttransform: scale3d(1.1, 0, 0);\n\t}\n\t\n\t/**fly effect*/\n\t.fly-transition {\n\t\ttransition: all .3s ease;\n\t}\n\t\n\t.fly-enter,\n\t.fly-leave {\n\t\topacity: 0;\n\t\t-webkit-transform: rotateY(90deg);\n\t\ttransform: rotateY(90deg);\n\t}\n</style>"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 77 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2126,12 +2171,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	//
 	// 		<span v-else><i class="glyphicon glyphicon-file"></i></span>
 	//
-	// 		<a href="javascript:void(0);" 
-	// 			@dblclick.stop="clickCallback(model.id)" 
-	// 			@click.stop="toggleClick(model)">{{model.name}}</a>
+	// 		<a href="javascript:void(0);" @dblclick.stop="clickCallback(model.id)" @click.stop="toggleClick(model)">{{model.name}}</a>
 	//
-	// 		<ul v-if="isParent" v-show="open">
-	// 			<item v-for="model in model.childrens" :model="model">{{model.name}}</item>
+	// 		<ul v-if="isParent" v-show="open" :transition="effect">
+	// 			<item v-for="model in model.childrens" :model="model" :effect="effect">{{model.name}}</item>
 	// 		</ul>
 	//
 	// 	</li>
@@ -2141,7 +2184,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = {
 		name: 'item',
 		props: {
-			model: Object
+			model: Object,
+			effect: {
+				type: String,
+				default: ''
+			}
 		},
 		data: function data() {
 			return {
@@ -2168,19 +2215,69 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	};
 	// </script>
+	//
+	// <style>
+	// 	/**fade effect*/
+	// 	.fade-transition {
+	// 		transition: all .3s ease;
+	// 	}
+	//
+	// 	.fade-enter,
+	// 	.fade-leave {
+	// 		opacity: 0;
+	// 		-webkit-transform: scale(1.1);
+	// 		transform: scale(1.1);
+	// 	}
+	//
+	// 	/**expand effect*/
+	// 	.expand-transition {
+	// 		transition: all .2s ease;
+	// 	}
+	//
+	// 	.expand-enter,
+	// 	.expand-leave {
+	// 		opacity: 0;
+	// 		-webkit-transform: translate(0px, -30px);
+	// 		transform: translate(0px, -30px);
+	// 	}
+	//
+	// 	/**bounce effect*/
+	// 	.bounce-transition {
+	// 		transition: all .3s ease;
+	// 	}
+	//
+	// 	.bounce-enter,
+	// 	.bounce-leave {
+	// 		opacity: 0;
+	// 		-webkit-transform: scale3d(1.1, 0, 0);
+	// 		transform: scale3d(1.1, 0, 0);
+	// 	}
+	//
+	// 	/**fly effect*/
+	// 	.fly-transition {
+	// 		transition: all .3s ease;
+	// 	}
+	//
+	// 	.fly-enter,
+	// 	.fly-leave {
+	// 		opacity: 0;
+	// 		-webkit-transform: rotateY(90deg);
+	// 		transform: rotateY(90deg);
+	// 	}
+	// </style>
 	/* generated by vue-loader */
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<li class=\"has-list\" :class=\"[open? 'open': '']\">\n\t<span v-if=\"isParent\">\n\t\t<i class=\"glyphicon\" \n\t\t\t@click.stop.self=\"clickCallback(model.id, model.name)\" \n\t\t\t:class=\"[open ? 'glyphicon-folder-open' : 'glyphicon-folder-close']\">\n\t\t</i>\n\t</span>\n\t\n\t<span v-else><i class=\"glyphicon glyphicon-file\"></i></span>\n\t\n\t<a href=\"javascript:void(0);\" \n\t\t@dblclick.stop=\"clickCallback(model.id)\" \n\t\t@click.stop=\"toggleClick(model)\">{{model.name}}</a>\n\t\n\t<ul v-if=\"isParent\" v-show=\"open\">\n\t\t<item v-for=\"model in model.childrens\" :model=\"model\">{{model.name}}</item>\n\t</ul>\n\t\n</li>\n";
+	module.exports = "\n<li class=\"has-list\" :class=\"[open? 'open': '']\">\n\t<span v-if=\"isParent\">\n\t\t<i class=\"glyphicon\" \n\t\t\t@click.stop.self=\"clickCallback(model.id, model.name)\" \n\t\t\t:class=\"[open ? 'glyphicon-folder-open' : 'glyphicon-folder-close']\">\n\t\t</i>\n\t</span>\n\n\t<span v-else><i class=\"glyphicon glyphicon-file\"></i></span>\n\n\t<a href=\"javascript:void(0);\" @dblclick.stop=\"clickCallback(model.id)\" @click.stop=\"toggleClick(model)\">{{model.name}}</a>\n\n\t<ul v-if=\"isParent\" v-show=\"open\" :transition=\"effect\">\n\t\t<item v-for=\"model in model.childrens\" :model=\"model\" :effect=\"effect\">{{model.name}}</item>\n\t</ul>\n\n</li>\n";
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<ul class=\"neris-tree tree-lines\">\n\t<template v-for=\"node in treeData\">\n\t\t<tree :model=\"node\"></tree>\n\t</template>\n</ul>\n";
+	module.exports = "\n<ul class=\"neris-tree tree-lines\">\n\t<template v-for=\"node in treeData\">\n\t\t<tree :model=\"node\" :effect=\"effect\"></tree>\n\t</template>\n</ul>\n";
 
 /***/ }
 /******/ ])
