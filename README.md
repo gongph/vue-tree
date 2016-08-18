@@ -23,7 +23,7 @@ Add the component in your vue view.
     <tree url="your-url-path" @on-click="onClick"></tree>
   </div>
   <script type="text/javascript">
-	var tree = VueNeris.tree;
+	var tree = VueTree.tree;
 	new Vue({
 		el: '#app',
 		components: {

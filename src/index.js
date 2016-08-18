@@ -1,9 +1,9 @@
 import tree from './components/treeSet';
 
-const VueNeris = {
+const VueTree = {
 	tree
 }
 
-module.exports = VueNeris;
+module.exports = VueTree;
 
 

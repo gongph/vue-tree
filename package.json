@@ -2,13 +2,13 @@
   "name": "vue-neris",
   "version": "1.0.0",
   "description": "common components develop with Vue.js",
-  "main": "dist/vue-neris.js",
+  "main": "dist/vue-tree.js",
   "directories": {
     "src": "src/"
   },
   "scripts": {
     "docs": "webpack-dev-server --inline --hot --progress --quiet",
-    "build": "webpack --progress --hide-modules --config config/webpack.build.js",
+    "build": "webpack --progress --hide-modules --config webpack.build.js",
     "builddocs": "webpack --progress --hide-modules"
   },
   "keywords": [
