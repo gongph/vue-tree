@@ -47,7 +47,7 @@ Prop        | Data Type         | Default   | Description
 ----------- | ----------------- | --------- | -------------------------------
 `url`       | String            | ''        | 数据源。
 `async`     | Boolean           | false     | 是否开启异步加载。
-`effect`    | String            | ''        | 过渡动画。 可选值：`fade` | `expand` | `bounce` | `fly`
+`effect`    | String            | ''        | 过渡动画。 可选值：fade，expand，bounce，fly。
 
 ### Events
 List of available events to use in component:
