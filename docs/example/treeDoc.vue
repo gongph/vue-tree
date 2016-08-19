@@ -1,10 +1,10 @@
 <template>
 	<div class="bs-docs-section">
 		<h1 id="nav" class="page-header">
-			树形组件
+			树形组件API
 		</h1>
 		<div class="alert alert-info">
-			依赖 <code>vue.js</code> 和 <code>Bootstrap CSS 3.x.x</code> . 除此之外不依赖任何第三方库。
+			<strong>说明：</strong>依赖 <code>vue.js</code> 和 <code>Bootstrap CSS 3.x.x</code> . 除此之外不依赖任何第三方库。
 		</div>
 		<h2>同步加载</h2>
 		<div class="bs-example">
