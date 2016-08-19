@@ -14,17 +14,18 @@
 		<pre><code class="language-markup"><script type="language-mark-up"><tree url="your_request_url" @on-click="syncClick" effect="bounce"></tree>
 </script></code></pre>	
 		<pre><code class="language-js"><script type="language-mark-up">new Vue({
-el: '#app',
-methods: {
-	syncClick: function (node) {
-		// 你的业务逻辑
-		console.log('你选择的是：' + node.name);
+	el: '#app',
+	methods: {
+		syncClick: function (node) {
+			// 你的业务逻辑
+			console.log('你选择的是：' + node.name);
+		}
 	}
-}
+});
 </script></code></pre>
 
 		<h2>异步加载</h2>
-		<p>异步加载需要在组件标签中配置 <code>async</code> 属性.</p>
+		<p>异步加载需要在组件标签中配置 <code>async</code> 属性. 异步请求数据时会向服务器端传递一个 <code>pid</code> 参数。</p>
 		<div class="bs-example">
 			<tree url="http://asyncLoadData.com" async></tree>
 		</div>
@@ -107,7 +108,7 @@ methods: {
 	  
 	  <h2>事件</h2>
 	  <p>以下是组件可用的事件列表</p>
-		<table class="table table-bordered">
+	  <table class="table table-bordered">
 		    <thead>
 		      <tr>
 		        <th>事件名</th>
@@ -122,6 +123,84 @@ methods: {
 		        <td><code>Function</code></td>
 		        <td><code>node：</code>被点击的节点对象</td>
 		        <td>返回当前被点击的节点对象。具体用法参考：<a href="#">同步加载</a></td>
+		      </tr>
+		    </tbody>
+	  </table>
+	  
+	  <h2>服务端响应的数据格式</h2>
+	  <p>你应该把所有的数据都放在一个叫 <code>datas</code> 的集合数组对象中，然后response到前台。就像下面这样：</p>
+	  <pre><code class="language-js"><script type="language-mark-up">datas: [
+	  	{
+	  		id: "1", 
+	  		name: "根节点1", 
+	  		isParent: true, 
+	  		pid: "0", 
+	  		childrens: [
+	  			{
+	  				id: '11',
+	  				name: "子节点",
+	  				isParent: false,
+	  				pid: '1',
+	  			}
+	  		]
+	  	},
+	  	{
+	  		id: "2", 
+	  		name: "根节点2", 
+	  		isParent: true, 
+	  		pid: "0", 
+	  		childrens: [
+	  			{
+	  				id: '21',
+	  				name: "子节点",
+	  				isParent: true,
+	  				pid: '2',
+	  				childrens: []
+	  			}
+	  		]
+	  	}
+]</script></code></pre>
+		<h2>datas中的对象属性</h2>
+		<p>下面是datas集合数组中 <code>每个对象</code>包含的属性：</p>
+		<table class="table table-bordered">
+		    <thead>
+		      <tr>
+		        <th>属性</th>
+		        <th>类型</th>
+		        <th>是否必填</th>
+		        <th>描述</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		        <td>id</td>
+		        <td><code>String</code></td>
+		        <td><code>是</code></td>
+		        <td>节点唯一标识</td>
+		      </tr>
+		      <tr>
+		        <td>name</td>
+		        <td><code>String</code></td>
+		        <td><code>是</code></td>
+		        <td>节点名称</td>
+		      </tr>
+		      <tr>
+		        <td>isParent</td>
+		        <td><code>Boolean</code></td>
+		        <td><code>是</code></td>
+		        <td>是否是父节点</td>
+		      </tr>
+		      <tr>
+		        <td>pid</td>
+		        <td><code>String</code></td>
+		        <td><code>是</code></td>
+		        <td>父节点的唯一标识</td>
+		      </tr>
+		      <tr>
+		        <td>childrens</td>
+		        <td><code>ArrayObject</code></td>
+		        <td><code>否</code></td>
+		        <td>当前节点下的孩子节点</td>
 		      </tr>
 		    </tbody>
 	  </table>
