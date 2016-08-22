@@ -6,15 +6,37 @@
 		<div class="alert alert-info">
 			<strong>说明：</strong>依赖 <code>vue.js</code> 和 <code>Bootstrap CSS 3.x.x</code> . 除此之外不依赖任何第三方库。
 		</div>
-		<h2>同步加载</h2>
+		<h2><a name="usage">使用</a></h2>
+		<pre><code class="language-html">&lt;link href="css/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/&gt;
+
+&lt;script src="js/vue.js"&gt;&lt;/script&gt;
+&lt;script src="[component path]/dist/vue-tree.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;
+...
+&lt;body&gt;
+	&lt;div id="app"&gt;
+		&lt;tree&gt;&lt;/tree&gt;
+	&lt;/div&gt;
+	&lt;script&gt;
+		var Tree = VueTree.tree;
+		new Vue({
+			el: '#app',
+			components: {
+				'tree': Tree
+			}
+		});
+	&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+		<h2><a name="sync">同步加载</a></h2>
 		<div class="bs-example">
 			<tree url="http://syncLoadData.com" @on-click="syncClick"></tree>
 			<p>你选择的是：{{syncNode | json}}</p>
 		</div>
-		<pre><code class="language-markup"><script type="language-mark-up"><tree url="your_request_url" @on-click="syncClick" effect="bounce"></tree>
+		<pre><code class="language-markup"><script type="language-mark-up"><div id="app">
+	<tree url="your_request_url" @on-click="syncClick" effect="bounce"></tree>
+</div>
 </script></code></pre>	
 		<pre><code class="language-js"><script type="language-mark-up">new Vue({
-	el: '#app',
+	...
 	methods: {
 		syncClick: function (node) {
 			// 你的业务逻辑
@@ -24,7 +46,7 @@
 });
 </script></code></pre>
 
-		<h2>异步加载</h2>
+		<h2><a name="async">异步加载</a></h2>
 		<p>异步加载需要在组件标签中配置 <code>async</code> 属性. 异步请求数据时会向服务器端传递一个 <code>pid</code> 参数。</p>
 		<div class="bs-example">
 			<tree url="http://asyncLoadData.com" async></tree>
@@ -32,7 +54,7 @@
 		<pre><code class="language-markup"><script type="language-mark-up"><tree url="your_request_url" async></tree>
 </script></code></pre>
 		
-		<h2>过度效果</h2>
+		<h2><a name="translator">过度效果</a></h2>
 		<p>通过组件属性 <code>effect</code> 配置不同的效果，组件提供了4种可用的过度效果。如下：</p>
 		<div>
 			<!-- Nav tabs -->
@@ -73,7 +95,7 @@
 
 		</div>
 		
-		<h2>选项</h2>
+		<h2><a name="options">选项</a></h2>
 		<p>以下是组件可用的 <code>prop</code> 列表</p>
 		<table class="table table-bordered">
 		    <thead>
@@ -106,7 +128,7 @@
 		    </tbody>
 	  </table>
 	  
-	  <h2>事件</h2>
+	  <h2><a name="events">事件</a></h2>
 	  <p>以下是组件可用的事件列表</p>
 	  <table class="table table-bordered">
 		    <thead>
@@ -122,12 +144,12 @@
 		        <td>@on-click</td>
 		        <td><code>Function</code></td>
 		        <td><code>node：</code>被点击的节点对象</td>
-		        <td>返回当前被点击的节点对象。具体用法参考：<a href="#">同步加载</a></td>
+		        <td>返回当前被点击的节点对象。具体用法参考：<a href="#sync">同步加载</a></td>
 		      </tr>
 		    </tbody>
 	  </table>
 	  
-	  <h2>服务端响应的数据格式</h2>
+	  <h2><a name="server-data-format">服务端响应的数据格式</a></h2>
 	  <p>你应该把所有的数据都放在一个叫 <code>datas</code> 的集合数组对象中，然后response到前台。就像下面这样：</p>
 	  <pre><code class="language-js"><script type="language-mark-up">datas: [
 	  	{
@@ -160,7 +182,10 @@
 	  		]
 	  	}
 ]</script></code></pre>
-		<h2>datas中的对象属性</h2>
+		<h2>
+			<a href="#" style="font-size:12px; float: right; color: #222">TOP↑</a>
+			<a name="object">datas中的对象属性</a>
+		</h2>
 		<p>下面是datas集合数组中 <code>每个对象</code>包含的属性：</p>
 		<table class="table table-bordered">
 		    <thead>
