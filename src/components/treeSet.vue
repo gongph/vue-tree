@@ -61,6 +61,7 @@
 		},
 		methods: {
 			recurLoadData(pid, treeNodes, childNodes) {
+				if (!treeNodes) return;
 				for(let i = 0, len = treeNodes.length; i < len; i++) {
 					if(treeNodes[i].id === pid) {
 						if(!treeNodes[i].childrens || treeNodes[i].childrens.length <= 0) {
