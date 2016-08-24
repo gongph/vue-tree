@@ -150,8 +150,8 @@
 	  </table>
 	  
 	  <h2><a name="server-data-format">服务端响应的数据格式</a></h2>
-	  <p>你应该把所有的数据都放在一个叫 <code>datas</code> 的集合数组对象中，然后response到前台。就像下面这样：</p>
-	  <pre><code class="language-js"><script type="language-mark-up">datas: [
+	  <p>你应该把所有的对象都放在集合中，然后response到前台。就像下面这样：</p>
+	  <pre><code class="language-js"><script type="language-mark-up">[
 	  	{
 	  		id: "1", 
 	  		name: "根节点1", 
@@ -184,9 +184,8 @@
 ]</script></code></pre>
 		<h2>
 			<a href="#" style="font-size:12px; float: right; color: #222">TOP↑</a>
-			<a name="object">datas中的对象属性</a>
+			<a name="object">对象属性</a>
 		</h2>
-		<p>下面是datas集合数组中 <code>每个对象</code>包含的属性：</p>
 		<table class="table table-bordered">
 		    <thead>
 		      <tr>

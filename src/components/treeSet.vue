@@ -40,7 +40,7 @@
 		},
 		ready() {
 			callAjax(this.url, this.param).then((result) => {
-				this.treeData = result.datas;
+				this.treeData = result;
 			}).catch((error) => {
 				console.error(error);
 			});
@@ -52,7 +52,7 @@
 			handleExpandEvent(pid) {
 				if(this.async) {
 					callAjax(this.url, this.param = pid).then((result) => {
-						this.recurLoadData(pid, this.treeData, result.datas);
+						this.recurLoadData(pid, this.treeData, result);
 					}).catch((error) => {
 						console.error(error);
 					});
@@ -63,7 +63,7 @@
 			recurLoadData(pid, treeNodes, childNodes) {
 				for(let i = 0, len = treeNodes.length; i < len; i++) {
 					if(treeNodes[i].id === pid) {
-						if(treeNodes[i].childrens.length <= 0) {
+						if(!treeNodes[i].childrens || treeNodes[i].childrens.length <= 0) {
 							treeNodes[i].childrens = childNodes;
 							break;
 						}
